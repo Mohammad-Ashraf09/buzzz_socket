@@ -1,8 +1,15 @@
 import {Server} from "socket.io";
 
+let REACT_UI_BASE_URL = '';
+if(process.env.NODE_ENV === 'production'){
+    REACT_UI_BASE_URL = 'https://buzzz-ui.vercel.app'
+}else{
+    REACT_UI_BASE_URL = "http://localhost:3000";
+}
+
 const io = new Server({
     cors:{
-        origin: "http://localhost:3000",
+        origin: REACT_UI_BASE_URL,
     },
 });
 
