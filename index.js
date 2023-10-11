@@ -1,13 +1,16 @@
-import {Server} from "socket.io";
+const express = require('express');
+const { createServer } = require('node:http');
+const { Server } = require('socket.io');
+const cors = require('cors');
 
-let REACT_UI_BASE_URL = '';
-if(process.env.NODE_ENV === 'production'){
-    REACT_UI_BASE_URL = 'https://buzzz-ui.vercel.app'
-}else{
-    REACT_UI_BASE_URL = "http://localhost:3000";
-}
+const app = express();
+app.use(cors());
+const server = createServer(app);
+const { REACT_UI_BASE_URL } = require('./config/keys');
 
-const io = new Server({
+const PORT = process.env.PORT || 8100;
+
+const io = new Server(server, {
     cors:{
         origin: REACT_UI_BASE_URL,
     },
@@ -102,4 +105,4 @@ io.on("connection", (socket)=>{
     });
 });
 
-io.listen(8100);
+server.listen(PORT, () => console.log(`server is running on port ${PORT}`));
