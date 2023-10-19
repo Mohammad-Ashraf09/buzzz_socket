@@ -17,7 +17,7 @@ const io = new Server(server, {
 });
 
 // for notification
-let users1 = [];
+const users1 = [];
 const addUser1 = (userId, socketId)=>{
     !users1.some(user=>user.userId === userId) && users1.push({userId, socketId});
 }
@@ -30,7 +30,7 @@ const getUser1 = (userId)=>{
 
 
 //for messanger
-let users2 = [];
+const users2 = [];
 const addUser2 = (userId, socketId)=>{
     !users2.some(user=>user.userId === userId) && users2.push({userId, socketId});
 }
